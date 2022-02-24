@@ -30,7 +30,6 @@ function CommentsForm(props) {
   function onChangeInputHandler(e) {
     const text = e.target.value;
     setComment({
-      userName: userName,
       content: text,
     });
   }
@@ -39,6 +38,7 @@ function CommentsForm(props) {
     e.preventDefault();
     const commentObject = {
       ...comment,
+      userName: userName,
       date: currentTime(),
       id: `${userName+currentTime()}`
     };
@@ -72,12 +72,10 @@ function CommentsForm(props) {
     <div className={styles.commentsFormWrapper}>
     {addComment.map((element,index) => {
       return <Comment 
-        userName={element.userName} 
-        content={element.content} 
-        date={element.date} 
+        value={element}
         isLogined={isLogined}
         key={element.date+JSON.stringify(index)}
-        onClick={onClickDeleteHandler}
+        onDelete={onClickDeleteHandler}
         />
     })}
     </div>
